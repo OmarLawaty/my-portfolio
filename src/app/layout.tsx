@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Raleway } from 'next/font/google';
 import { Container } from '@chakra-ui/react';
 
-import { Footer, Providers } from '@/components';
+import { Footer, Header, Providers } from '@/components';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -23,6 +23,8 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
     <body>
       <Providers>
         <Container>
+          <Header />
+
           {children}
 
           <Footer />
