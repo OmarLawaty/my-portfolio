@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Raleway } from 'next/font/google';
+import { Container } from '@chakra-ui/react';
 
-import { Providers } from '@/components';
+import { Footer, Providers } from '@/components';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -20,7 +21,13 @@ interface RootLayoutProps {
 const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
   <html lang='en' className={raleway.className}>
     <body>
-      <Providers>{children}</Providers>
+      <Providers>
+        <Container>
+          {children}
+
+          <Footer />
+        </Container>
+      </Providers>
     </body>
   </html>
 );

@@ -1,5 +1,9 @@
-import { Container } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
 export default function Home() {
-  return <Container>Home Page</Container>;
+  return (
+    <Box as='main' flex='1'>
+      Home Page
+    </Box>
+  );
 }
