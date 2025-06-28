@@ -1,8 +1,29 @@
-import { createSystem, defineConfig, defaultConfig } from '@chakra-ui/react';
+import { createSystem, defineConfig, defaultConfig, defineRecipe } from '@chakra-ui/react';
 
 const themeConfig = defineConfig({
   preflight: true,
+  globalCss: {
+    '*': {
+      WebkitTapHighlightColor: 'transparent',
+      scrollBehavior: 'smooth',
+    },
+    body: {
+      backgroundColor: 'gray.900',
+      color: 'gray.300',
+      scrollbarGutter: 'stable',
+      fontFamily: '"Raleway", sans-serif',
+    },
+    '#root': {
+      minH: '100vh',
+      w: 'full',
+      display: 'flex',
+      flexDirection: 'column',
+    },
+  },
   theme: {
+    recipes: {
+      container: defineRecipe({ base: { p: ['0.5rem 1.5rem', '1rem 3rem', null, '2rem 12.5rem'] } }),
+    },
     tokens: {
       colors: {
         'gray.900': { value: '#0C0C0D' },
