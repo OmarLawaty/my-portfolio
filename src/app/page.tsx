@@ -1,9 +1,11 @@
-import { Box } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
+
+import { Introduction } from '@/components';
 
 export default function Home() {
   return (
-    <Box as='main' flex='1'>
-      Home Page
-    </Box>
+    <Flex as='main' flex='1' gap='56'>
+      <Introduction />
+    </Flex>
   );
 }

@@ -20,7 +20,7 @@ const themeConfig = defineConfig({
   theme: {
     recipes: {
       container: defineRecipe({
-        base: { p: ['0.5rem 1.5rem', '1rem 3rem', null, '2rem 12.5rem'], flex: 1, display: 'flex', flexDir: 'column' },
+        base: { p: ['0.5rem 1.5rem', '1rem 3rem', null, '2rem 6rem'], flex: 1, display: 'flex', flexDir: 'column' },
       }),
     },
     tokens: {

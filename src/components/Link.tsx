@@ -2,11 +2,11 @@
 
 import type { ComponentProps } from 'react';
 import NextLink from 'next/link';
-import { Button, chakra } from '@chakra-ui/react';
+import { Button, chakra, type ButtonProps } from '@chakra-ui/react';
 
 import { getSearchParams } from '@/utils/helpers';
 
-const forwardProps = ['href', 'prefetch', 'target', 'children'] as const satisfies (keyof NextLinkProps)[];
+const forwardProps = ['href', 'prefetch', 'target', 'children', 'download'] as const satisfies (keyof NextLinkProps)[];
 type ForwardProp = (typeof forwardProps)[number];
 
 const ChakraNextLink = chakra(
@@ -19,17 +19,19 @@ const ChakraNextLink = chakra(
 type NextLinkProps = ComponentProps<typeof NextLink>;
 type ChakraNextLinkProps = ComponentProps<typeof ChakraNextLink>;
 
-interface LinkProps extends Omit<ChakraNextLinkProps, ForwardProp>, Pick<NextLinkProps, ForwardProp> {
+type LinkProps = {
   keepSearchParams?: boolean;
-  isDisabled?: boolean;
-}
+  href: ChakraNextLinkProps['href'];
+} & (
+  | ({ isDisabled: true } & ButtonProps)
+  | ({ isDisabled?: false } & Exclude<ChakraNextLinkProps, ForwardProp> & Pick<NextLinkProps, ForwardProp>)
+);
 
-export const Link = ({ keepSearchParams, isDisabled, ...props }: LinkProps) => {
+export const Link = ({ keepSearchParams, ...props }: LinkProps) => {
   const searchParams = getSearchParams();
 
   const href = keepSearchParams ? `${props.href}?${searchParams}` : props.href;
-
-  if (isDisabled)
+  if ('isDisabled' in props && props.isDisabled)
     return (
       <Button disabled bg='transparent' m='0' p='0' minH='auto' h='auto' minW='auto' w='auto' {...props}>
         {props.children}

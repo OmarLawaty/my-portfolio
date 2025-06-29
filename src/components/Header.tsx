@@ -6,8 +6,8 @@ import { usePathname } from 'next/navigation';
 
 import { PersonalInfo } from '@/const';
 
-import { ContactLinks } from '../ContactLinks';
-import { Link } from '../Link';
+import { ContactLinks } from './ContactLinks';
+import { Link } from './Link';
 
 interface Page {
   title: string;
