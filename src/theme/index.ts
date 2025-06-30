@@ -1,4 +1,6 @@
-import { createSystem, defineConfig, defaultConfig, defineRecipe } from '@chakra-ui/react';
+import { createSystem, defineConfig, defaultConfig } from '@chakra-ui/react';
+
+import { recipes } from './recipes';
 
 const themeConfig = defineConfig({
   preflight: true,
@@ -15,14 +17,11 @@ const themeConfig = defineConfig({
       minH: '100vh',
       display: 'flex',
       flexDirection: 'column',
+      alignItems: 'center',
     },
   },
   theme: {
-    recipes: {
-      container: defineRecipe({
-        base: { p: ['0.5rem 1.5rem', '1rem 3rem', null, '2rem 6rem'], flex: 1, display: 'flex', flexDir: 'column' },
-      }),
-    },
+    recipes,
     tokens: {
       colors: {
         'gray.900': { value: '#0C0C0D' },

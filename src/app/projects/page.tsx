@@ -1,9 +1,14 @@
 import { Box } from '@chakra-ui/react';
+import type { Metadata } from 'next';
 
-export default function Page() {
-  return (
-    <Box as='main' flex='1'>
-      Projects Page
-    </Box>
-  );
-}
+import { PersonalInfo } from '@/const';
+
+export const metadata: Metadata = { title: `${PersonalInfo.name} | Projects` };
+
+const Page = () => (
+  <Box as='main' flex='1'>
+    Projects Page
+  </Box>
+);
+
+export default Page;

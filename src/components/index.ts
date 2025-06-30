@@ -1,6 +1,6 @@
 export * from './Providers';
 export * from './Footer';
-export * from './Header';
+export * from './header';
 export * from './ContactLinks';
 export * from './Link';
 export * from './home';
