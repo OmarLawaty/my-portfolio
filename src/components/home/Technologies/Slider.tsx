@@ -1,0 +1,178 @@
+'use client';
+
+import { Box, Flex, Text, type FlexProps } from '@chakra-ui/react';
+import { motion, useScroll } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
+import debounce from 'lodash.debounce';
+
+import { AnimatedLink, Image } from '@/components';
+import { lightenColor } from '@/utils/helpers';
+import { storageURL } from '@/const';
+
+type Technology = {
+  name: string;
+  color: string;
+  url: string;
+};
+
+const technologies: Technology[] = [
+  {
+    name: 'Typescript',
+    url: 'https://www.typescriptlang.org/',
+    color: '#3178C6',
+  },
+  {
+    name: 'React',
+    url: 'https://reactjs.org/',
+    color: '#61DAFB',
+  },
+  {
+    name: 'Next.js',
+    url: 'https://nextjs.org/',
+    color: '#000000',
+  },
+  {
+    name: 'Motion',
+    url: 'https://motion.dev/',
+    color: '#0088CC',
+  },
+  {
+    name: 'Chakra UI',
+    url: 'https://chakra-ui.com/',
+    color: '#319795',
+  },
+];
+
+export const Slider = (props: FlexProps) => {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const SLIDE_WIDTH = useRef(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const { scrollX } = useScroll({ container: scrollContainerRef });
+
+  const scrollIntoView = (slideIndex: number) =>
+    scrollContainerRef.current?.children[slideIndex].scrollIntoView({
+      block: 'nearest',
+      inline: 'start',
+      behavior: 'smooth',
+    });
+
+  useEffect(() => {
+    SLIDE_WIDTH.current = scrollContainerRef.current?.children[0].clientWidth ?? 0;
+  }, []);
+
+  useEffect(() => {
+    const debouncedSetActiveSlide = debounce(
+      (totalScroll: number) => setActiveSlide(Math.abs(Math.round(totalScroll / SLIDE_WIDTH.current))),
+      0
+    );
+    const unsubscribe = scrollX.onChange(debouncedSetActiveSlide);
+
+    return () => {
+      unsubscribe();
+      debouncedSetActiveSlide.cancel();
+    };
+  }, [scrollX]);
+
+  return (
+    <Flex flexDir='column' gap='6' w='full' maxW='100%' overflowX='hidden' {...props}>
+      <Flex
+        pos='relative'
+        _before={{
+          content: '""',
+          width: '10',
+          position: 'absolute',
+          inset: '0',
+          insetEnd: 'unset',
+          bg: `linear-gradient(to left, transparent, #0C0C0D)`,
+          zIndex: 1,
+        }}
+        _after={{
+          content: '""',
+          width: '10',
+          position: 'absolute',
+          inset: '0',
+          insetStart: 'unset',
+          bg: `linear-gradient(to right, transparent, #0C0C0D)`,
+          zIndex: 1,
+        }}
+      >
+        <Flex
+          ref={scrollContainerRef}
+          gap='10'
+          scrollSnapType='inline mandatory'
+          overflow='auto'
+          scrollPaddingX='4'
+          ps='4'
+          pe='25rem'
+          py='6'
+          overscrollBehaviorInline='contain'
+          scrollBehavior='smooth'
+          pos='relative'
+          scrollbar='hidden'
+        >
+          {technologies.map(tech => (
+            <AnimatedLink
+              key={tech.name}
+              href={tech.url}
+              target='_blank'
+              display='flex'
+              flexDir='column'
+              justifyContent='center'
+              p='12'
+              gap='2.5'
+              bg={lightenColor(tech.color, 0.3)}
+              rounded='3.75rem'
+              minW='25.5rem'
+              minH='72'
+              scrollSnapAlign='center'
+              transform='scale(1)'
+              whileHover={{ transform: 'scale(1.05)', boxShadow: `0 0 1rem 0.25rem ${lightenColor(tech.color, 0.3)}` }}
+              transition={{ type: 'spring', stiffness: 600, damping: 15 }}
+            >
+              <Image
+                src={storageURL + 'technologies/' + tech.name.replace(' ', '-').toLowerCase() + '.svg'}
+                alt={`${tech.name} icon`}
+                width={60}
+                height={60}
+              />
+
+              <Text fontSize='1.625rem' fontWeight='700' color='gray.700'>
+                {tech.name}
+              </Text>
+            </AnimatedLink>
+          ))}
+        </Flex>
+      </Flex>
+
+      <Flex gap='1.5' mx='auto'>
+        {technologies.map((tech, index) => (
+          <IndicatorDot key={tech.name} isActive={index === activeSlide} onClick={() => scrollIntoView(index)} />
+        ))}
+      </Flex>
+    </Flex>
+  );
+};
+
+interface IndicatorDotProps {
+  isActive: boolean;
+  onClick?: () => void;
+}
+
+const IndicatorDot = ({ isActive, ...props }: IndicatorDotProps) => (
+  <AnimatedBox
+    h='3.5'
+    rounded='full'
+    cursor='pointer'
+    whileHover={{
+      opacity: isActive ? 1 : 0.8,
+    }}
+    animate={{
+      width: isActive ? '4rem' : '1.25rem',
+      backgroundColor: isActive ? '#D9D9D9' : '#606060',
+    }}
+    transition={{ type: 'spring', stiffness: 400, damping: 30, opacity: { duration: 0.5 } }}
+    {...props}
+  />
+);
+
+const AnimatedBox = motion.create(Box);

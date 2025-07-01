@@ -3,6 +3,7 @@
 import type { ComponentProps } from 'react';
 import NextLink from 'next/link';
 import { Button, chakra, type ButtonProps } from '@chakra-ui/react';
+import { motion } from 'motion/react';
 
 import { getSearchParams } from '@/utils/helpers';
 
@@ -47,3 +48,10 @@ export const Link = ({ keepSearchParams, ...props }: LinkProps) => {
 
   return <ChakraNextLink {...props} href={href} />;
 };
+
+const AnimatedChakraNextLink = motion.create(Link);
+type AnimatedChakraNextLinkProps = ComponentProps<typeof AnimatedChakraNextLink>;
+
+export const AnimatedLink = (props: LinkProps & Omit<AnimatedChakraNextLinkProps, 'target'>) => (
+  <AnimatedChakraNextLink {...props} />
+);
