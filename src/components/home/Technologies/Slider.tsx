@@ -9,11 +9,11 @@ import { AnimatedLink, Image } from '@/components';
 import { lightenColor } from '@/utils/helpers';
 import { storageURL } from '@/const';
 
-type Technology = {
+interface Technology {
   name: string;
   color: string;
   url: string;
-};
+}
 
 const technologies: Technology[] = [
   {
