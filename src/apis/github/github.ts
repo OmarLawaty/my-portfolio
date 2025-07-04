@@ -1,9 +1,17 @@
-import axios from 'axios';
+import axios, { type AxiosResponse } from 'axios';
 
-export const github = axios.create({
-  baseURL: 'https://api.github.com/graphql',
-  headers: {
-    Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
-    'Content-Type': 'application/json',
-  },
-});
+import type { GitHubResponse, LatestRepositories } from './types';
+
+export const github = <T extends LatestRepositories>(query: string) =>
+  axios
+    .post<GitHubResponse<T>, AxiosResponse<GitHubResponse<T>>, { query: string }>(
+      'https://api.github.com/graphql',
+      { query },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    )
+    .then(res => res.data.data.user);

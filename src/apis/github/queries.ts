@@ -1,19 +1,4 @@
-export const GET_PINNED_REPOS = (total: number = 6) => `query {
-  user(login: "OmarLawaty") {
-    pinnedItems(first: ${total}, types: [REPOSITORY]) {
-      nodes {
-        ... on Repository {
-          name
-          description
-          url
-          homepageUrl
-        }
-      }
-    }
-  }
-}`;
-
-export const GET_LATEST_REPOS = (total: number = 3) => `query {
+export const GET_LATEST_REPOS = (total: number = 10) => `query {
   user(login: "omarlawaty") {
     repositories(first: ${total}, orderBy: { field: PUSHED_AT, direction: DESC }, privacy: PUBLIC) {
       nodes {
@@ -21,6 +6,13 @@ export const GET_LATEST_REPOS = (total: number = 3) => `query {
         description
         url
         homepageUrl
+        repositoryTopics(last: 5) {
+          nodes {
+            topic {
+              name
+            }
+          }
+        }
       }
     }
   }

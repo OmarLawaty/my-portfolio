@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
         hostname: 'storage.googleapis.com',
         pathname: '/omarlawatey-portfolio-storage/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',
+        pathname: '/OmarLawaty/**',
+      },
     ],
   },
 };
