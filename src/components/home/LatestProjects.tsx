@@ -98,6 +98,7 @@ export const LatestProjects = () => {
                 gap='2'
                 maxW='27.5rem'
                 minW='fit'
+                flex='0 0 max-content'
                 rounded='1rem'
                 borderColor='#3d444d'
                 borderWidth='1px'
