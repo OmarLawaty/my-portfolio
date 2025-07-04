@@ -106,6 +106,7 @@ export const LatestProjects = () => {
                 h='min'
                 scrollSnapAlign='center'
                 pos='relative'
+                transformOrigin='center'
                 animate={{
                   transform: i === activeRepoIndex ? 'scale(1.1)' : 'scale(0.9)',
                   boxShadow: i === activeRepoIndex ? '0 0 1rem 0.25rem rgba(179, 146, 255, 0.3)' : 'none',
