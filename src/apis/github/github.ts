@@ -9,7 +9,7 @@ export const github = <T extends LatestRepositories>(query: string) =>
       { query },
       {
         headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
           'Content-Type': 'application/json',
         },
       }
