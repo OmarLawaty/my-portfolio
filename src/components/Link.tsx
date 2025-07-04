@@ -52,6 +52,6 @@ export const Link = ({ keepSearchParams, ...props }: LinkProps) => {
 const AnimatedChakraNextLink = motion.create(Link);
 type AnimatedChakraNextLinkProps = ComponentProps<typeof AnimatedChakraNextLink>;
 
-export const AnimatedLink = (props: LinkProps & Omit<AnimatedChakraNextLinkProps, 'target'>) => (
-  <AnimatedChakraNextLink {...props} />
-);
+export type AnimatedLinkProps = LinkProps & Omit<AnimatedChakraNextLinkProps, 'target'>;
+
+export const AnimatedLink = (props: AnimatedLinkProps) => <AnimatedChakraNextLink {...props} />;

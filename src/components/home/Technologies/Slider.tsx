@@ -1,13 +1,12 @@
 'use client';
 
 import { Box, Flex, Text, type FlexProps } from '@chakra-ui/react';
-import { motion, useScroll } from 'motion/react';
-import { useEffect, useRef, useState } from 'react';
-import debounce from 'lodash.debounce';
+import { motion } from 'motion/react';
 
 import { AnimatedLink, Image } from '@/components';
 import { lightenColor } from '@/utils/helpers';
 import { storageURL } from '@/const';
+import { useSlider } from '@/hooks';
 
 interface Technology {
   name: string;
@@ -44,34 +43,7 @@ const technologies: Technology[] = [
 ];
 
 export const Slider = (props: FlexProps) => {
-  const [activeSlide, setActiveSlide] = useState(0);
-  const SLIDE_WIDTH = useRef(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const { scrollX } = useScroll({ container: scrollContainerRef });
-
-  const scrollIntoView = (slideIndex: number) =>
-    scrollContainerRef.current?.children[slideIndex].scrollIntoView({
-      block: 'nearest',
-      inline: 'start',
-      behavior: 'smooth',
-    });
-
-  useEffect(() => {
-    SLIDE_WIDTH.current = scrollContainerRef.current?.children[0].clientWidth ?? 0;
-  }, []);
-
-  useEffect(() => {
-    const debouncedSetActiveSlide = debounce(
-      (totalScroll: number) => setActiveSlide(Math.abs(Math.round(totalScroll / SLIDE_WIDTH.current))),
-      0
-    );
-    const unsubscribe = scrollX.onChange(debouncedSetActiveSlide);
-
-    return () => {
-      unsubscribe();
-      debouncedSetActiveSlide.cancel();
-    };
-  }, [scrollX]);
+  const { scrollContainerRef, scrollIntoView, activeSlide } = useSlider();
 
   return (
     <Flex flexDir='column' gap='6' w='full' maxW='100%' overflowX='hidden' {...props}>
@@ -120,7 +92,7 @@ export const Slider = (props: FlexProps) => {
               justifyContent='center'
               p='12'
               gap='2.5'
-              bg={lightenColor(tech.color, 0.3)}
+              bg={lightenColor(tech.color, 0.4)}
               rounded='3.75rem'
               minW='25.5rem'
               minH='72'
