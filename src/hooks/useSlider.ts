@@ -8,7 +8,7 @@ export const useSlider = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const SLIDE_WIDTH = useRef(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const { scrollX } = useScroll({ container: scrollContainerRef });
+  const { scrollX } = useScroll({ container: scrollContainerRef, layoutEffect: false });
 
   const scrollIntoView = (
     slideIndex: number,
@@ -20,10 +20,14 @@ export const useSlider = () => {
   ) => scrollContainerRef.current?.children[slideIndex].scrollIntoView(options);
 
   useEffect(() => {
+    if (!scrollContainerRef.current?.children.length) return;
+
     SLIDE_WIDTH.current = scrollContainerRef.current?.children[0].clientWidth ?? 0;
   }, []);
 
   useEffect(() => {
+    if (!scrollContainerRef.current) return;
+
     const debouncedSetActiveSlide = debounce(
       (totalScroll: number) =>
         setActiveSlide(
@@ -47,6 +51,5 @@ export const useSlider = () => {
     scrollIntoView,
     activeSlide,
     setActiveSlide,
-    direction: (scrollX?.getPrevious() || scrollX.get()) < scrollX.get() ? 1 : -1,
   };
 };

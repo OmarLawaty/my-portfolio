@@ -1,10 +1,12 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, type QueryFunctionContext } from '@tanstack/react-query';
 
 import { GET_LATEST_REPOS, github, type LatestRepositories, type Field, type Repository } from '@/apis';
 
-const queryKey = ['latest-repos'];
+const queryKey = (indicator: Field = 'f') => ['latest-repos', indicator] as const;
 
-const queryFn = (indicator: Field = 'f') =>
+type QueryKey = ReturnType<typeof queryKey>;
+
+const queryFn = ({ queryKey: [, indicator] }: QueryFunctionContext<QueryKey>) =>
   github<LatestRepositories>(GET_LATEST_REPOS()).then(res =>
     res.repositories.nodes.reduce<Repository[]>((repos, repo) => {
       const repoIndication = repo.repositoryTopics.nodes.find(node => node.topic.name.startsWith(`${indicator}-`));
@@ -24,8 +26,8 @@ interface LatestReposQueryProps {
 
 export const useLatestReposQuery = ({ indicator = 'f' }: LatestReposQueryProps = {}) =>
   useQuery({
-    queryKey,
-    queryFn: () => queryFn(indicator),
+    queryKey: queryKey(indicator),
+    queryFn,
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 60 * 24, // 1 day
     select: data => data.sort((a, b) => getRepoRank(b) - getRepoRank(a)),

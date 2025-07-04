@@ -4,46 +4,14 @@ import { Box, Flex, Text, type FlexProps } from '@chakra-ui/react';
 import { motion } from 'motion/react';
 
 import { AnimatedLink, Image } from '@/components';
-import { lightenColor } from '@/utils/helpers';
-import { storageURL } from '@/const';
-import { useSlider } from '@/hooks';
-
-interface Technology {
-  name: string;
-  color: string;
-  url: string;
-}
-
-const technologies: Technology[] = [
-  {
-    name: 'Typescript',
-    url: 'https://www.typescriptlang.org/',
-    color: '#3178C6',
-  },
-  {
-    name: 'React',
-    url: 'https://reactjs.org/',
-    color: '#61DAFB',
-  },
-  {
-    name: 'Next.js',
-    url: 'https://nextjs.org/',
-    color: '#000000',
-  },
-  {
-    name: 'Motion',
-    url: 'https://motion.dev/',
-    color: '#0088CC',
-  },
-  {
-    name: 'Chakra UI',
-    url: 'https://chakra-ui.com/',
-    color: '#319795',
-  },
-];
+import { constructStorageURL, lightenColor } from '@/utils/helpers';
+import { useConfigQuery, useSlider } from '@/hooks';
 
 export const Slider = (props: FlexProps) => {
   const { scrollContainerRef, scrollIntoView, activeSlide } = useSlider();
+  const configQuery = useConfigQuery();
+
+  if (!configQuery.isSuccess) return null;
 
   return (
     <Flex flexDir='column' gap='6' w='full' maxW='100%' overflowX='hidden' {...props}>
@@ -82,7 +50,7 @@ export const Slider = (props: FlexProps) => {
           pos='relative'
           scrollbar='hidden'
         >
-          {technologies.map(tech => (
+          {configQuery.data.technologies.map(tech => (
             <AnimatedLink
               key={tech.name}
               href={tech.url}
@@ -102,7 +70,7 @@ export const Slider = (props: FlexProps) => {
               transition={{ type: 'spring', stiffness: 600, damping: 15 }}
             >
               <Image
-                src={storageURL + 'technologies/' + tech.name.replace(' ', '-').toLowerCase() + '.svg'}
+                src={constructStorageURL('technologies/' + tech.name.replace(' ', '-').toLowerCase() + '.svg')}
                 alt={`${tech.name} icon`}
                 width={60}
                 height={60}
@@ -117,7 +85,7 @@ export const Slider = (props: FlexProps) => {
       </Flex>
 
       <Flex gap='1.5' mx='auto'>
-        {technologies.map((tech, index) => (
+        {configQuery.data.technologies.map((tech, index) => (
           <IndicatorDot key={tech.name} isActive={index === activeSlide} onClick={() => scrollIntoView(index)} />
         ))}
       </Flex>

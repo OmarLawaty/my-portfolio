@@ -20,7 +20,7 @@ export const LatestProjects = () => {
   const activeRepo = repos[activeRepoIndex];
 
   return (
-    <Flex flexDir='column' gap='12'>
+    <Flex flexDir='column' gap='16'>
       <Heading as='h3' textAlign='center' display='flex' flexDir='column' gap='4' fontSize='1.75rem'>
         Take a look at
         <Text
@@ -35,12 +35,13 @@ export const LatestProjects = () => {
       </Heading>
 
       <Flex flexDir='column' gap='8'>
-        <Link target='_blank' href={activeRepo.url} w='80%' mx='auto'>
+        <Link target='_blank' href={activeRepo.homepageUrl} w='80%' mx='auto'>
           <AnimatePresence mode='wait'>
             <AnimatedImage
               key={activeRepo.name}
               src={previewImage(activeRepo.name)}
               alt={activeRepo.name}
+              title={`See ${activeRepo.name} live`}
               quality={80}
               width={680}
               height={360}

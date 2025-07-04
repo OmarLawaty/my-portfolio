@@ -16,6 +16,7 @@ const forwardProps = [
   'onError',
   'loading',
   'fetchPriority',
+  'unoptimized',
 ] as const satisfies (keyof ComponentProps<typeof NextImage>)[];
 type ForwardProp = (typeof forwardProps)[number];
 

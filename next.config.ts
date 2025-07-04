@@ -8,8 +8,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'storage.googleapis.com',
-        pathname: '/omarlawatey-portfolio-storage/**',
+        hostname: 'omarlawatey-portfolio-storage.storage.googleapis.com',
+        pathname: '**',
       },
       {
         protocol: 'https',

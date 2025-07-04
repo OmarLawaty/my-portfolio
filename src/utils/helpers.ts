@@ -1,3 +1,5 @@
+import { storageURL } from '@/const';
+
 export const isClient = () => typeof window !== 'undefined';
 
 export const getSearchParams = () => {
@@ -14,3 +16,5 @@ export const lightenColor = (hex: string, amount: number): string =>
 
     return lighter.toString(16).padStart(2, '0');
   });
+
+export const constructStorageURL = (path: string) => `${storageURL}/${path}`;

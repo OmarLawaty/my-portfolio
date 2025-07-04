@@ -1,4 +1,6 @@
-export const storageURL = 'https://storage.googleapis.com/omarlawatey-portfolio-storage/';
+import { constructStorageURL } from './utils/helpers';
+
+export const storageURL = 'https://omarlawatey-portfolio-storage.storage.googleapis.com';
 
 export const PersonalInfo = {
   name: 'Omar Lawatey',
@@ -6,7 +8,7 @@ export const PersonalInfo = {
   email: 'omarlawatey@gmail.com',
   github: 'https://github.com/omarlawaty',
   linkedIn: 'https://linkedIn.com/in/omarlawatey',
-  photo: storageURL + 'photo.jpg',
-  resume: storageURL + 'resume.pdf',
+  photo: constructStorageURL('photo.jpg'),
+  resume: constructStorageURL('resume.pdf'),
   locations: ['Giza, Egypt', 'Damietta, Egypt'],
 };

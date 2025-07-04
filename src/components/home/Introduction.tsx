@@ -49,15 +49,14 @@ export const Introduction = () => (
       width={400}
       height={400}
       priority
-      quality={100}
       fetchPriority='high'
+      unoptimized
       w='21rem'
       h='21rem'
       aspectRatio='square'
       objectFit='cover'
       objectPosition='0 20%'
       rounded='full'
-      lazy
     />
   </Flex>
 );
