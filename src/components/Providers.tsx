@@ -17,7 +17,7 @@ export const Providers = ({ children }: ProvidersProps) => {
   return (
     <QueryClientProvider client={queryClient}>
       <Analytics mode='auto' />
-      <ChakraProvider value={system}>{children}</ChakraProvider>;
+      <ChakraProvider value={system}>{children}</ChakraProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

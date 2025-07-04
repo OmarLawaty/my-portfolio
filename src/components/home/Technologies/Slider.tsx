@@ -4,7 +4,7 @@ import { Box, Flex, Text, type FlexProps } from '@chakra-ui/react';
 import { motion } from 'motion/react';
 
 import { AnimatedLink, Image } from '@/components';
-import { constructStorageURL, lightenColor } from '@/utils/helpers';
+import { constructTechnologyIconURL, lightenColor } from '@/utils/helpers';
 import { useConfigQuery, useSlider } from '@/hooks';
 
 export const Slider = (props: FlexProps) => {
@@ -69,12 +69,7 @@ export const Slider = (props: FlexProps) => {
               whileHover={{ transform: 'scale(1.05)', boxShadow: `0 0 1rem 0.25rem ${lightenColor(tech.color, 0.3)}` }}
               transition={{ type: 'spring', stiffness: 600, damping: 15 }}
             >
-              <Image
-                src={constructStorageURL('technologies/' + tech.name.replace(' ', '-').toLowerCase() + '.svg')}
-                alt={`${tech.name} icon`}
-                width={60}
-                height={60}
-              />
+              <Image src={constructTechnologyIconURL(tech.name)} alt={`${tech.name} icon`} width={60} height={60} />
 
               <Text fontSize='1.625rem' fontWeight='700' color='gray.700'>
                 {tech.name}

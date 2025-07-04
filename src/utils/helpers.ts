@@ -18,3 +18,6 @@ export const lightenColor = (hex: string, amount: number): string =>
   });
 
 export const constructStorageURL = (path: string) => `${storageURL}/${path}`;
+
+export const constructTechnologyIconURL = (name: string) =>
+  constructStorageURL(`technologies/${name.split(' ').join('-').toLowerCase()}.svg`);

@@ -4,9 +4,7 @@ import { Footer, Header, Providers } from '@/components';
 
 import { fonts } from './fonts';
 
-const fontClassNames = Object.values(fonts)
-  .map(font => font.className)
-  .join(' ');
+const fontClassNames = fonts.map(font => font.className).join(' ');
 
 interface RootLayoutProps {
   children: React.ReactNode;

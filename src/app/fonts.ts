@@ -10,7 +10,4 @@ const nunito = Nunito({
   display: 'swap',
 });
 
-export const fonts = {
-  raleway,
-  nunito,
-};
+export const fonts = [raleway, nunito];

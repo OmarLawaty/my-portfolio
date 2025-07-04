@@ -34,7 +34,7 @@ export const Introduction = () => (
           minW='11.5rem'
           transition='color 0.2s'
           fontWeight='600'
-          fontFamily={"'Nunito', sans-serif"}
+          fontFamily="'Nunito', sans-serif"
           fontSize='1rem'
           _hover={{ color: 'purple.200' }}
         >

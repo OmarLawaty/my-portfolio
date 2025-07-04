@@ -2,7 +2,7 @@ import { Flex } from '@chakra-ui/react';
 import type { Metadata } from 'next';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
-import { Introduction, LatestProjects, Technologies } from '@/components';
+import { Introduction, LatestProjects, Skills, Technologies } from '@/components';
 import { useConfigQuery, useLatestReposQuery } from '@/hooks';
 import { PersonalInfo } from '@/const';
 
@@ -27,6 +27,8 @@ const Home = async () => {
         <Technologies />
 
         <LatestProjects />
+
+        <Skills />
       </Flex>
     </HydrationBoundary>
   );
