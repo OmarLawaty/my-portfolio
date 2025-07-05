@@ -1,22 +1,22 @@
 'use client';
 
-import { GoLinkExternal, GoRepo } from 'react-icons/go';
 import { AnimatePresence, motion } from 'motion/react';
-import { Box, Flex, Heading, Text } from '@chakra-ui/react';
+import { Flex, Heading, Text } from '@chakra-ui/react';
 
-import { useLatestReposQuery, useSlider } from '@/hooks';
+import { useReposQuery, useSlider } from '@/hooks';
 
 import { Image } from '../Image';
 import { Link } from '../Link';
+import { ProjectCard } from '../ProjectCard';
 
 export const LatestProjects = () => {
-  const latestReposQuery = useLatestReposQuery();
+  const reposQuery = useReposQuery();
 
   const { scrollContainerRef, scrollIntoView, activeSlide: activeRepoIndex } = useSlider();
 
-  if (!latestReposQuery.isSuccess) return null;
+  if (!reposQuery.isSuccess) return null;
 
-  const repos = latestReposQuery.data!.slice(0, 5);
+  const repos = reposQuery.data!.slice(0, 5);
   const activeRepo = repos[activeRepoIndex];
 
   return (
@@ -92,60 +92,22 @@ export const LatestProjects = () => {
             scrollbar='hidden'
           >
             {repos.map((repo, i) => (
-              <AnimatedFlex
+              <ProjectCard
                 key={repo.name}
-                flexDir='column'
-                p='6'
-                gap='2'
-                maxW='27.5rem'
-                minW='fit'
-                flex='0 0 max-content'
-                rounded='1rem'
-                borderColor='#3d444d'
-                borderWidth='1px'
-                h='min'
-                scrollSnapAlign='center'
-                pos='relative'
+                repo={repo}
                 transformOrigin='center'
+                scrollSnapAlign='center'
+                flex='0 0 max-content'
                 animate={{
                   transform: i === activeRepoIndex ? 'scale(1.1)' : 'scale(0.9)',
                   boxShadow: i === activeRepoIndex ? '0 0 1rem 0.25rem rgba(179, 146, 255, 0.3)' : 'none',
                 }}
                 transition={{ type: 'spring', stiffness: 450, damping: 25 }}
-              >
-                <Flex align='center' gap='2'>
-                  <GoRepo size='1.125rem' />
-
-                  <Link
-                    href={repo.url}
-                    target='_blank'
-                    color='#4493f8'
-                    fontWeight='600'
-                    fontSize='1rem'
-                    _hover={{ textDecoration: 'underline' }}
-                  >
-                    {repo.name}
-                  </Link>
-                </Flex>
-
-                <Text fontSize='0.875rem'>{repo.description}</Text>
-
-                <Flex align='center' gap='2.5'>
-                  <GoLinkExternal size='0.875rem' />
-
-                  <Link href={repo.homepageUrl} target='_blank' fontSize='0.875rem' color='purple.200' fontWeight='600'>
-                    Live Preview
-                  </Link>
-                </Flex>
-
-                <Box
-                  pos='absolute'
-                  inset='0'
-                  visibility={i === activeRepoIndex ? 'hidden' : 'visible'}
-                  cursor='pointer'
-                  onClick={() => scrollIntoView(i)}
-                />
-              </AnimatedFlex>
+                overlayProps={{
+                  visibility: i === activeRepoIndex ? 'hidden' : 'visible',
+                  onClick: () => scrollIntoView(i),
+                }}
+              />
             ))}
           </Flex>
         </Flex>
@@ -154,7 +116,6 @@ export const LatestProjects = () => {
   );
 };
 
-const AnimatedFlex = motion.create(Flex);
 const AnimatedImage = motion.create(Image);
 
 const previewImage = (name: string) => `https://raw.githubusercontent.com/OmarLawaty/${name}/main/design/preview.png`;

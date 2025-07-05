@@ -1,3 +1,3 @@
-export * from './home';
+export * from './useReposQuery';
 export * from './useSlider';
 export * from './useConfigQuery';

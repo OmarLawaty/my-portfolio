@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
 import { Introduction, LatestProjects, Skills, Technologies } from '@/components';
-import { useConfigQuery, useLatestReposQuery } from '@/hooks';
+import { useConfigQuery, useReposQuery } from '@/hooks';
 import { PersonalInfo } from '@/const';
 
 export const metadata: Metadata = { title: PersonalInfo.name };
@@ -13,8 +13,8 @@ const Home = async () => {
 
   await Promise.all([
     queryClient.prefetchQuery({
-      queryKey: useLatestReposQuery.queryKey(),
-      queryFn: useLatestReposQuery.queryFn,
+      queryKey: useReposQuery.queryKey(),
+      queryFn: useReposQuery.queryFn,
     }),
     queryClient.prefetchQuery(useConfigQuery),
   ]);
