@@ -1,6 +1,6 @@
 'use client';
 
-import { Flex } from '@chakra-ui/react';
+import { Flex, Heading, Text } from '@chakra-ui/react';
 
 import { useReposQuery } from '@/hooks';
 
@@ -12,10 +12,29 @@ export const ProjectsList = () => {
   if (!reposQuery.isSuccess) return null;
 
   return (
-    <Flex as='section' wrap='wrap' gap='10'>
-      {reposQuery.data.map(repo => (
-        <ProjectCard key={repo.name} repo={repo} flex='1 1 30rem' minW='auto' maxW='unset' />
-      ))}
+    <Flex as='section' flexDir='column' gap='16'>
+      <Flex as='header' flexDir='column' gap='4' px='4' align='center'>
+        <Heading
+          as='h1'
+          fontSize='3rem'
+          fontWeight='700'
+          bg='linear-gradient(270deg,rgb(255, 82, 246), #5551ff)'
+          lineHeight='normal'
+          bgClip='text'
+        >
+          Ideas Brought to Life
+        </Heading>
+
+        <Text fontSize='1.25rem' textAlign='center'>
+          From full-stack apps to fun side projects, here&apos;s what I&apos;ve been crafting.
+        </Text>
+      </Flex>
+
+      <Flex wrap='wrap' gap='10'>
+        {reposQuery.data.map(repo => (
+          <ProjectCard key={repo.name} repo={repo} flex='1 1 30rem' minW='auto' maxW='unset' />
+        ))}
+      </Flex>
     </Flex>
   );
 };
