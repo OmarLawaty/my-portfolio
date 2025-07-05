@@ -46,11 +46,11 @@ export const Introduction = () => (
     <Image
       src={PersonalInfo.photo}
       alt={PersonalInfo.name}
-      width={400}
-      height={400}
+      width={336}
+      height={336}
       priority
       fetchPriority='high'
-      unoptimized
+      quality={50}
       w='21rem'
       h='21rem'
       aspectRatio='square'
