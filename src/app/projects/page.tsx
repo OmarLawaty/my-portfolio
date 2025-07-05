@@ -6,7 +6,11 @@ import { PersonalInfo } from '@/const';
 import { useReposQuery } from '@/hooks';
 import { ProjectsList } from '@/components';
 
-export const metadata: Metadata = { title: `${PersonalInfo.name} | Projects` };
+export const metadata: Metadata = {
+  title: `${PersonalInfo.name} | Projects`,
+  description:
+    'Explore a selection of projects by Omar Lawatey, showcasing front-end web applications, creative solutions, and modern development practices.',
+};
 
 const Page = async () => {
   const queryClient = new QueryClient();
