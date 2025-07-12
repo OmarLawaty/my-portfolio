@@ -9,7 +9,7 @@ type QueryKey = ReturnType<typeof queryKey>;
 
 const queryFn = ({ queryKey: [, indicator, limit] }: QueryFunctionContext<QueryKey>) =>
   axios
-    .post<LatestRepositories>(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000' + '/api/github/repos', {
+    .post<LatestRepositories>((process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000') + '/api/github/repos', {
       query: GET_LATEST_REPOS(limit),
     })
     .then(res =>
