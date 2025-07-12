@@ -1,7 +1,5 @@
 import { constructStorageURL } from './utils/helpers';
 
-export const storageURL = 'https://storage.googleapis.com/omarlawatey-portfolio-storage';
-
 export const PersonalInfo = {
   name: 'Omar Lawatey',
   username: 'omarlawatey',

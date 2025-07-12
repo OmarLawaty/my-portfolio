@@ -1,5 +1,3 @@
-import { storageURL } from '@/const';
-
 export const isClient = () => typeof window !== 'undefined';
 
 export const getSearchParams = () => {
@@ -17,7 +15,8 @@ export const lightenColor = (hex: string, amount: number): string =>
     return lighter.toString(16).padStart(2, '0');
   });
 
-export const constructStorageURL = (path: string) => `${storageURL}/${path}`;
+export const constructStorageURL = (path: string) =>
+  `https://storage.googleapis.com/omarlawatey-portfolio-storage/${path}`;
 
 export const constructTechnologyIconURL = (name: string) =>
   constructStorageURL(`technologies/${name.split(' ').join('-').toLowerCase()}.svg`);

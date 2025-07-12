@@ -1,24 +1,29 @@
+import axios from 'axios';
 import { useQuery, type QueryFunctionContext } from '@tanstack/react-query';
 
-import { GET_LATEST_REPOS, github, type LatestRepositories, type Field, type Repository } from '@/apis';
+import { GET_LATEST_REPOS, type LatestRepositories, type Field, type Repository } from '@/apis';
 
 const queryKey = (indicator: Field = 'f', limit: number = 10) => ['latest-repos', indicator, limit] as const;
 
 type QueryKey = ReturnType<typeof queryKey>;
 
 const queryFn = ({ queryKey: [, indicator, limit] }: QueryFunctionContext<QueryKey>) =>
-  github<LatestRepositories>(GET_LATEST_REPOS(limit)).then(res =>
-    res.repositories.nodes.reduce<Repository[]>((repos, repo) => {
-      const repoIndication = repo.repositoryTopics.nodes.find(node => node.topic.name.startsWith(`${indicator}-`));
+  axios
+    .post<LatestRepositories>(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000' + '/api/github/repos', {
+      query: GET_LATEST_REPOS(limit),
+    })
+    .then(res =>
+      res.data.repositories.nodes.reduce<Repository[]>((repos, repo) => {
+        const repoIndication = repo.repositoryTopics.nodes.find(node => node.topic.name.startsWith(`${indicator}-`));
 
-      if (!repoIndication) return repos;
+        if (!repoIndication) return repos;
 
-      repo.repositoryTopics.nodes = [repoIndication];
-      repos.push(repo);
+        repo.repositoryTopics.nodes = [repoIndication];
+        repos.push(repo);
 
-      return repos;
-    }, [])
-  );
+        return repos;
+      }, [])
+    );
 
 interface LatestReposQueryProps {
   indicator?: Field;
