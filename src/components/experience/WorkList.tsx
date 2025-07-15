@@ -68,7 +68,7 @@ const WorkCard = ({ work, ...props }: WorkCardProps) => (
 
           <Box ms='4'>
             {work.responsibilities.map((responsibility, index) => (
-              <Text key={index} as='li' fontWeight='200' fontFamily="'Nunito', sans-serif" color='gray.400'>
+              <Text key={index} fontWeight='200' fontFamily="'Nunito', sans-serif" color='gray.400'>
                 {responsibility}
               </Text>
             ))}
