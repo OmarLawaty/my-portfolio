@@ -1,6 +1,6 @@
 'use client';
 
-import { Flex, Heading, Text, type FlexProps } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text, type FlexProps } from '@chakra-ui/react';
 
 import { useExperienceQuery } from '@/hooks';
 import type { Work } from '@/apis';
@@ -54,12 +54,35 @@ const WorkCard = ({ work, ...props }: WorkCardProps) => {
         </Flex>
       </Flex>
 
-      <Flex flexDir='column' flex='3' gap='8' fontSize='1rem'>
-        <Text color='purple.300' fontWeight='600'>
+      <Flex flexDir='column' flex='3' gap='3' fontSize='1rem'>
+        <Text color='purple.300' fontWeight='600' fontSize='1.125rem'>
           {work.title}
         </Text>
 
-        <Text color='gray.400'>{work.description}</Text>
+        <Flex flexDir='column' color='gray.400'>
+          <Text>{work.description}</Text>
+
+          <Box mt='2'>
+            <Text fontWeight='500' color='green.500'>
+              Responsibilities:
+            </Text>
+
+            <Box ms='4'>
+              {work.responsibilities.map((responsibility, index) => (
+                <Text key={index} as='li' fontWeight='200' fontFamily="'Nunito', sans-serif" color='gray.400'>
+                  {responsibility}
+                </Text>
+              ))}
+            </Box>
+
+            <Text mt='2'>
+              <Text as='span' fontWeight='500' color='green.500'>
+                Tech:
+              </Text>{' '}
+              {work.tech.join(', ')}.
+            </Text>
+          </Box>
+        </Flex>
       </Flex>
     </Flex>
   );
