@@ -8,3 +8,4 @@ export * from './Image';
 export * from './DownloadResumeButton';
 export * from './projects';
 export * from './ProjectCard';
+export * from './experience';

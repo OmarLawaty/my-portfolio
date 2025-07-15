@@ -1,7 +1,10 @@
-import { Box } from '@chakra-ui/react';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
+import { Flex } from '@chakra-ui/react';
 import type { Metadata } from 'next';
 
 import { PersonalInfo } from '@/const';
+import { Heading, WorkList } from '@/components';
+import { useExperienceQuery } from '@/hooks';
 
 export const metadata: Metadata = {
   title: `${PersonalInfo.name} | Experience`,
@@ -9,10 +12,20 @@ export const metadata: Metadata = {
     "Learn about Omar Lawatey's background in computer science, education, and professional experience as a front-end developer.",
 };
 
-const Page = () => (
-  <Box as='main' flex='1'>
-    Experience Page
-  </Box>
-);
+const Page = async () => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(useExperienceQuery);
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <Flex as='main' flex='1' flexDir='column' align='center' gap='36'>
+        <Heading />
+
+        <WorkList />
+      </Flex>
+    </HydrationBoundary>
+  );
+};
 
 export default Page;
