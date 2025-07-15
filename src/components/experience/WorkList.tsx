@@ -31,7 +31,7 @@ interface WorkCardProps extends FlexProps {
 
 const WorkCard = ({ work, ...props }: WorkCardProps) => {
   return (
-    <Flex gap='8' px='16' py='12' bg='gray.800' rounded='3rem' flex='1' {...props}>
+    <Flex gap='8' px='14' py='10' bg='gray.800' rounded='3rem' flex='1' textTransform='capitalize' {...props}>
       <Flex flexDir='column' flex='1' minW='20rem' gap='4'>
         <Heading as='h3' color='white' fontWeight='600' fontSize='1.5rem' lineHeight='normal'>
           {work.role}
@@ -41,8 +41,8 @@ const WorkCard = ({ work, ...props }: WorkCardProps) => {
           {work.type}
         </Text>
 
-        <Flex flexDir='column' gap='1'>
-          <Text>
+        <Flex flexDir='column' gap='1' fontWeight='200' fontSize='0.9rem' color='gray.400'>
+          <Text fontFamily="'Nunito', sans-serif">
             {work.startDate}{' '}
             <Text as='span' color='green.500'>
               -
@@ -59,7 +59,7 @@ const WorkCard = ({ work, ...props }: WorkCardProps) => {
           {work.title}
         </Text>
 
-        <Text>{work.description}</Text>
+        <Text color='gray.400'>{work.description}</Text>
       </Flex>
     </Flex>
   );

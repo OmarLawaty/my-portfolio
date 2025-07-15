@@ -1,6 +1,6 @@
 export interface Experience {
   work: Work[];
-  certifications: Certifications[];
+  certifications: Certification[];
   education: Education[];
 }
 
@@ -16,7 +16,7 @@ export interface Work {
   responsibilities: string[];
 }
 
-export interface Certifications {
+export interface Certification {
   title: string;
   authority: string;
   date: string;

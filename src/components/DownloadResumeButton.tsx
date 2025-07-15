@@ -56,7 +56,7 @@ export const DownloadResumeButton = ({ animationDir = 'left', ...props }: Downlo
       }}
       {...props}
     >
-      <Text zIndex='2' pos='relative' fontWeight='600' fontFamily={"'Nunito', sans-serif"} fontSize='1rem'>
+      <Text zIndex='2' pos='relative' fontWeight='600' fontFamily="'Nunito', sans-serif" fontSize='1rem'>
         Download Resume
       </Text>
     </Link>
