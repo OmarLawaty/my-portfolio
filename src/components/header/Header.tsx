@@ -17,8 +17,6 @@ export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobile] = useMediaQuery(['(max-width: 480px)']);
 
-  console.log('isMobile', isMobile);
-
   useEffect(() => {
     setIsScrolled(window.scrollY > compactHeaderScrollThreshold);
 
@@ -57,7 +55,7 @@ export const Header = () => {
           isMobile
             ? {
                 top: isScrolled ? '100vh' : '2rem',
-                transform: isScrolled ? 'translateY(calc(-100% - 1.5rem))' : 'translateY(0)',
+                transform: isScrolled ? 'translateY(calc((-100vh + 100dvh) - 100% - 1.5rem))' : 'translateY(0)',
               }
             : { minWidth: isScrolled ? '0' : '100%' }
         }
