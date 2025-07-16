@@ -12,7 +12,7 @@ export const Footer = (props: FlexProps) => (
     px={[6, 8, 12]}
     rounded='10rem'
     my='4'
-    mb={[16, 4]}
+    mb={[20, 4]}
     {...props}
   >
     <Box color='gray.400' fontSize={['1rem', '1.125rem', '1.25rem']} fontFamily="'Nunito', sans-serif">

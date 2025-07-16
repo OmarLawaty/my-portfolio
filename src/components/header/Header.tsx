@@ -15,7 +15,7 @@ const getInsetX = (index: number) =>
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobile] = useMediaQuery(['(max-width: 540px)']);
+  const [isMobile] = useMediaQuery(['(max-width: 480px)']);
 
   console.log('isMobile', isMobile);
 
@@ -53,7 +53,14 @@ export const Header = () => {
         w={['unset', 'fit']}
         minW={['unset', 'fit']}
         insetX={[getInsetX(0), 'unset']}
-        animate={isMobile ? { top: isScrolled ? '90vh' : '2rem' } : { minWidth: isScrolled ? '0' : '100%' }}
+        animate={
+          isMobile
+            ? {
+                top: isScrolled ? '100vh' : '2rem',
+                transform: isScrolled ? 'translateY(calc(-100% - 1.5rem))' : 'translateY(0)',
+              }
+            : { minWidth: isScrolled ? '0' : '100%' }
+        }
         transition={{ type: 'spring', stiffness: 400, damping: 30 }}
       >
         <PageIndicator />
