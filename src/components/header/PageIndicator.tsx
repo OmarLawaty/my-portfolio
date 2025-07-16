@@ -40,14 +40,14 @@ export const PageIndicator = () => {
   }, [pathname]);
 
   return (
-    <Flex gap='4' pos='relative'>
+    <Flex w={['full', 'auto']} justify='space-between' gap={[0, 2, 4]} pos='relative'>
       {pages.map((page, i) => (
         <Link
           key={i}
           href={page.href}
           prefetch
-          px='3'
-          py='1'
+          px={[2, 1.5, 3]}
+          py={[1, 0.5, 1]}
           whiteSpace='nowrap'
           userSelect='none'
           transition='color 0.3s'
@@ -57,7 +57,7 @@ export const PageIndicator = () => {
             linkRefs.current[i] = el;
           }}
         >
-          <Text pos='relative' zIndex='1' fontWeight='600'>
+          <Text pos='relative' fontSize={['clamp(0.7rem, 4vw, 1rem)', '0.875rem', '1rem']} zIndex='1' fontWeight='600'>
             {page.title}
           </Text>
         </Link>
