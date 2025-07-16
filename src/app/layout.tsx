@@ -14,7 +14,7 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
   <html lang='en' className={fontClassNames}>
     <body>
       <Providers>
-        <Container gap='36'>
+        <Container gap={[20, 24, 28, 36]}>
           <Header />
 
           {children}
