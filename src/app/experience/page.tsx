@@ -3,7 +3,7 @@ import { Flex } from '@chakra-ui/react';
 import type { Metadata } from 'next';
 
 import { PersonalInfo } from '@/const';
-import { CertificationsList, EducationList, Heading, WorkList } from '@/components';
+import { CertificationsList, EducationList, ExperienceHeading, WorkList } from '@/components';
 import { useExperienceQuery } from '@/hooks';
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ const Page = async () => {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Flex as='main' flex='1' flexDir='column' align='center' gap={[24, 28, 36]}>
-        <Heading />
+        <ExperienceHeading />
 
         <WorkList />
 

@@ -4,7 +4,7 @@ import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query
 
 import { PersonalInfo } from '@/const';
 import { useReposQuery } from '@/hooks';
-import { ProjectsList } from '@/components';
+import { ProjectsHeading, ProjectsList } from '@/components';
 
 export const metadata: Metadata = {
   title: `${PersonalInfo.name} | Projects`,
@@ -22,7 +22,9 @@ const Page = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Flex as='main' flex='1' flexDir='column'>
+      <Flex as='main' flex='1' flexDir='column' gap='16'>
+        <ProjectsHeading />
+
         <ProjectsList />
       </Flex>
     </HydrationBoundary>
