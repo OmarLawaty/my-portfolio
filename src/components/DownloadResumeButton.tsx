@@ -34,9 +34,7 @@ export const DownloadResumeButton = ({ animationDir = 'left', ...props }: Downlo
         content: '""',
         position: 'absolute',
         inset: '-1px',
-        transform: isHorizontal
-          ? `translateX(${isNegative ? '-' : ''}101%)`
-          : `translateY(${isNegative ? '-' : ''}101%)`,
+        transform: `translate${isHorizontal ? 'X' : 'Y'}(${isNegative ? '-' : ''}101%)`,
         bg: 'black',
         zIndex: '0',
         rounded: 'full',
@@ -56,7 +54,13 @@ export const DownloadResumeButton = ({ animationDir = 'left', ...props }: Downlo
       }}
       {...props}
     >
-      <Text zIndex='2' pos='relative' fontWeight='600' fontFamily="'Nunito', sans-serif" fontSize='1rem'>
+      <Text
+        zIndex='2'
+        pos='relative'
+        fontWeight='600'
+        fontFamily="'Nunito', sans-serif"
+        fontSize={['0.875rem', '0.9rem', '1rem']}
+      >
         Download Resume
       </Text>
     </Link>
