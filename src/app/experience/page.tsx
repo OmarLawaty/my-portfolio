@@ -19,7 +19,7 @@ const Page = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Flex as='main' flex='1' flexDir='column' align='center' gap='36'>
+      <Flex as='main' flex='1' flexDir='column' align='center' gap={[24, 28, 36]}>
         <Heading />
 
         <WorkList />

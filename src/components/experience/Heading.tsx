@@ -3,7 +3,7 @@ import { Flex, Heading as ChakraHeading } from '@chakra-ui/react';
 import { DownloadResumeButton } from '../DownloadResumeButton';
 
 export const Heading = () => (
-  <Flex as='section' w={['80%', '60%']} flexDir='column' align='center' gap='11'>
+  <Flex as='section' w={['90%', '80%', '60%']} flexDir='column' align='center' gap={[7, 9, 11]}>
     <ChakraHeading
       as='h1'
       fontSize={['clamp(0.9rem, 6vw, 1.5rem)', null, '1.75rem']}

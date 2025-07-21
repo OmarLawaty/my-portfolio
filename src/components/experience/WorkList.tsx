@@ -49,7 +49,7 @@ const WorkCard = ({ work, ...props }: WorkCardProps) => (
     textTransform='capitalize'
     {...props}
   >
-    <Flex flexDir='column' flex='1' minW='20rem' gap={[1, 2, 4]}>
+    <Flex flexDir='column' flex='1' minW={['none', null, '20rem']} gap={[1, 2, 4]}>
       <Heading as='h3' color='white' fontWeight='600' fontSize={['1rem', '1.125rem', '1.5rem']} lineHeight='normal'>
         {work.role}
       </Heading>
