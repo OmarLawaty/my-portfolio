@@ -12,8 +12,16 @@ export const Skills = () => {
   if (!configQuery.isSuccess) return null;
 
   return (
-    <Flex as='section' flexDir='column' gap='28'>
-      <Heading as='h3' color='gray.300' fontSize='3.25rem' fontWeight='400' lineHeight='normal' px='4'>
+    <Flex as='section' flexDir='column' gap={[16, 20, 24, 28]}>
+      <Heading
+        as='h3'
+        color='gray.300'
+        fontSize={['2rem', '2.75rem', '3.25rem']}
+        fontWeight='400'
+        lineHeight='normal'
+        px='4'
+        textAlign={['center', null, 'start']}
+      >
         These are the <br />
         technologies I&apos;ve been using
       </Heading>
