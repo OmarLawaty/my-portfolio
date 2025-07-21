@@ -22,7 +22,7 @@ export const useSlider = () => {
   useEffect(() => {
     if (!scrollContainerRef.current?.children.length) return;
 
-    SLIDE_WIDTH.current = scrollContainerRef.current?.children[0].clientWidth ?? 0;
+    SLIDE_WIDTH.current = scrollContainerRef.current.children[0].getBoundingClientRect().width;
   }, []);
 
   useEffect(() => {

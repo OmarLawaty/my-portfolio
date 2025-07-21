@@ -42,8 +42,8 @@ export const Slider = (props: FlexProps) => {
           scrollSnapType='inline mandatory'
           overflow='auto'
           scrollPaddingX='4'
-          ps='4'
-          pe='25rem'
+          ps={['10vw', null, 4]}
+          pe={['10vw', null, '25rem']}
           py='6'
           overscrollBehaviorInline='contain'
           scrollBehavior='smooth'
@@ -62,7 +62,7 @@ export const Slider = (props: FlexProps) => {
               gap='2.5'
               bg={lightenColor(tech.color, 0.4)}
               rounded='3.75rem'
-              minW='25.5rem'
+              minW={['80vw', '25.5rem']}
               minH='72'
               scrollSnapAlign='center'
               transform='scale(1)'

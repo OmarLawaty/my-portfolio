@@ -25,7 +25,7 @@ const Home = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Flex as='main' flex='1' gap='56' flexDir='column'>
+      <Flex as='main' flex='1' gap={[48, 52, 56]} flexDir='column'>
         <Introduction />
 
         <Technologies />
