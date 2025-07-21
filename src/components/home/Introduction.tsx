@@ -11,7 +11,7 @@ export const Introduction = () => (
     flexDir={['column-reverse', null, 'row']}
     as='section'
     w='full'
-    gap={[12, 16, 24]}
+    gap={[12, 16, null, 24]}
     align='center'
     justify='space-between'
     h='fit'
@@ -72,8 +72,8 @@ export const Introduction = () => (
       priority
       fetchPriority='high'
       quality={50}
-      w={['18rem', '21rem']}
-      h={['18rem', '21rem']}
+      w={['18rem', null, null, '21rem']}
+      h={['18rem', null, null, '21rem']}
       aspectRatio='square'
       objectFit='cover'
       objectPosition='0 20%'

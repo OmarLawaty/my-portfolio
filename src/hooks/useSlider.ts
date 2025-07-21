@@ -32,8 +32,8 @@ export const useSlider = () => {
       (totalScroll: number) =>
         setActiveSlide(
           Math.min(
-            Math.abs(Math.round(totalScroll / SLIDE_WIDTH.current)),
-            (scrollContainerRef.current?.children.length ?? 0) - 1
+            Math.floor((totalScroll + SLIDE_WIDTH.current * 0.25) / SLIDE_WIDTH.current),
+            (scrollContainerRef?.current?.children.length ?? 0) - 1
           )
         ),
       0
