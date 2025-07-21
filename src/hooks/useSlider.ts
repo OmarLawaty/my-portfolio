@@ -31,9 +31,12 @@ export const useSlider = () => {
     const debouncedSetActiveSlide = debounce(
       (totalScroll: number) =>
         setActiveSlide(
-          Math.min(
-            Math.floor((totalScroll + SLIDE_WIDTH.current * 0.25) / SLIDE_WIDTH.current),
-            (scrollContainerRef?.current?.children.length ?? 0) - 1
+          Math.max(
+            Math.min(
+              Math.floor((totalScroll + SLIDE_WIDTH.current * 0.25) / SLIDE_WIDTH.current),
+              (scrollContainerRef?.current?.children.length ?? 0) - 1
+            ),
+            0
           )
         ),
       0
