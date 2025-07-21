@@ -9,3 +9,4 @@ export * from './DownloadResumeButton';
 export * from './projects';
 export * from './ProjectCard';
 export * from './experience';
+export * from './PageTransitionWrapper';
