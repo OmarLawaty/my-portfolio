@@ -11,7 +11,8 @@ export const useConfigQuery = () =>
     queryKey,
     queryFn,
     refetchOnWindowFocus: false,
-    staleTime: 1000 * 60 * 60, // 1 hour
+    staleTime: 1000 * 60 * 10, // 10 minutes
+    gcTime: 1000 * 60 * 60 * 24, // 24 hours
   });
 
 useConfigQuery.queryKey = queryKey;
