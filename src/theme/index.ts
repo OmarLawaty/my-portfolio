@@ -8,6 +8,7 @@ const themeConfig = defineConfig({
     '*': {
       WebkitTapHighlightColor: 'transparent',
       scrollBehavior: 'smooth',
+      cursor: 'none',
     },
     body: {
       backgroundColor: 'gray.900',

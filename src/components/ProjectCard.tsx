@@ -54,7 +54,7 @@ export const ProjectCard = ({ repo, overlayProps, ...props }: ProjectCardProps) 
       </Link>
     </Flex>
 
-    <Box pos='absolute' inset='0' cursor='pointer' visibility='hidden' {...overlayProps} />
+    <Box pos='absolute' inset='0' data-cursor='interactive' visibility='hidden' {...overlayProps} />
   </AnimatedFlex>
 );
 

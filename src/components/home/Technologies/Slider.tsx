@@ -83,7 +83,7 @@ const IndicatorDot = ({ isActive, ...props }: IndicatorDotProps) => (
   <AnimatedBox
     h='3.5'
     rounded='full'
-    cursor='pointer'
+    data-cursor='interactive'
     whileHover={{
       opacity: isActive ? 1 : 0.8,
     }}
