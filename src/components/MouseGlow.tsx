@@ -27,6 +27,7 @@ export const MouseGlow = () => {
 
   return (
     <AnimatedBox
+      display={['none', null, 'block']}
       position='fixed'
       top='0'
       left='0'
