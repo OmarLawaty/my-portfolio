@@ -12,7 +12,7 @@ import { ProjectCard } from '../ProjectCard';
 export const LatestProjects = () => {
   const reposQuery = useReposQuery();
 
-  const { scrollContainerRef, scrollIntoView, activeSlide: activeRepoIndex } = useSlider();
+  const { scrollContainerRef, scrollIntoView, activeSlide: activeRepoIndex } = useSlider({ snapOffset: 0.1 });
 
   if (!reposQuery.isSuccess) return null;
 

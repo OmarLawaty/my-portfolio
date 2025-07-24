@@ -4,7 +4,11 @@ import debounce from 'lodash.debounce';
 import { useScroll } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 
-export const useSlider = () => {
+interface SliderProps {
+  snapOffset?: number;
+}
+
+export const useSlider = ({ snapOffset = 0.5 }: SliderProps = {}) => {
   const [activeSlide, setActiveSlide] = useState(0);
   const SLIDE_WIDTH = useRef(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -33,7 +37,7 @@ export const useSlider = () => {
         setActiveSlide(
           Math.max(
             Math.min(
-              Math.floor((totalScroll + SLIDE_WIDTH.current * 0.25) / SLIDE_WIDTH.current),
+              Math.floor((totalScroll + SLIDE_WIDTH.current * snapOffset) / SLIDE_WIDTH.current),
               (scrollContainerRef?.current?.children.length ?? 0) - 1
             ),
             0
