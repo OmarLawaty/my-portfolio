@@ -32,6 +32,7 @@ export const Skills = () => {
             key={category}
             flexDir='column'
             rounded='0.75rem'
+            bgColor='gray.900'
             borderColor='#232323'
             borderWidth='1px'
             gap='6'
@@ -42,6 +43,11 @@ export const Skills = () => {
             mb={i < configQuery.data.skills.length ? '16' : '0'}
             breakInside='avoid'
             fontFamily="'Nunito', sans-serif"
+            _hover={{
+              transform: 'scale(1.05)',
+              boxShadow: '0 0 2rem rgba(255, 255, 255, 0.2)',
+            }}
+            transition='transform 0.5s ease, box-shadow 0.2s ease'
           >
             <Heading as='h4' color='white' fontSize='1rem' fontWeight='400' lineHeight='normal'>
               {category}

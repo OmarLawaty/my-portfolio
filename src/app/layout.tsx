@@ -1,6 +1,6 @@
 import { Container } from '@chakra-ui/react';
 
-import { Footer, Header, Providers } from '@/components';
+import { Footer, Header, MouseGlow, Providers } from '@/components';
 
 import { fonts } from './fonts';
 
@@ -21,6 +21,8 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 
           <Footer />
         </Container>
+
+        <MouseGlow />
       </Providers>
     </body>
   </html>

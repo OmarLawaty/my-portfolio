@@ -26,6 +26,7 @@ export const ProjectCard = ({ repo, overlayProps, ...props }: ProjectCardProps) 
     borderWidth='1px'
     h='min'
     pos='relative'
+    bgColor='gray.900'
     {...props}
   >
     <Flex align='center' gap='2' fontSize={['0.875rem', '1rem', '1.125rem']}>

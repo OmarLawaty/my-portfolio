@@ -18,6 +18,7 @@ const themeConfig = defineConfig({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      zIndex: -2,
     },
   },
   theme: {

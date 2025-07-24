@@ -51,7 +51,7 @@ export const useSlider = ({ snapOffset = 0.5 }: SliderProps = {}) => {
       unsubscribe();
       debouncedSetActiveSlide.cancel();
     };
-  }, [scrollX]);
+  }, [scrollX, snapOffset]);
 
   return {
     scrollContainerRef,

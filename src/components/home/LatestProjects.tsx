@@ -63,60 +63,44 @@ export const LatestProjects = () => {
         </Link>
 
         <Flex
+          ref={scrollContainerRef}
+          gap={[8, 12, 16]}
+          scrollSnapType='inline mandatory'
+          overflow='auto'
+          scrollPaddingX='4'
+          px={['10vw', '5vw', '20rem']}
+          py={[8, null, 6]}
+          overscrollBehaviorInline='contain'
+          scrollBehavior='smooth'
           pos='relative'
-          _before={{
-            content: '""',
-            width: [10, 30, 40],
-            position: 'absolute',
-            inset: '0',
-            insetEnd: 'unset',
-            bg: `linear-gradient(to left, transparent, #0C0C0D)`,
-            zIndex: 1,
-            pointerEvents: 'none',
-          }}
-          _after={{
-            content: '""',
-            width: [10, 30, 40],
-            position: 'absolute',
-            inset: '0',
-            insetStart: 'unset',
-            bg: `linear-gradient(to right, transparent, #0C0C0D)`,
-            zIndex: 1,
-            pointerEvents: 'none',
+          scrollbar='hidden'
+          css={{
+            maskImage: 'linear-gradient(to right, transparent, black 20%, black 80%, transparent)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent, black 20%, black 80%, transparent)',
+            maskSize: '100% 100%',
+            WebkitMaskSize: '100% 100%',
+            maskRepeat: 'no-repeat',
+            WebkitMaskRepeat: 'no-repeat',
           }}
         >
-          <Flex
-            ref={scrollContainerRef}
-            gap={[8, 12, 16]}
-            scrollSnapType='inline mandatory'
-            overflow='auto'
-            scrollPaddingX='4'
-            px={['10vw', '5vw', '20rem']}
-            py={[8, null, 6]}
-            overscrollBehaviorInline='contain'
-            scrollBehavior='smooth'
-            pos='relative'
-            scrollbar='hidden'
-          >
-            {repos.map((repo, i) => (
-              <ProjectCard
-                key={repo.name}
-                repo={repo}
-                transformOrigin='center'
-                scrollSnapAlign='center'
-                minW={['60vw', null, '52vw', 'fit']}
-                animate={{
-                  transform: i === activeRepoIndex ? 'scale(1.1)' : 'scale(0.9)',
-                  boxShadow: i === activeRepoIndex ? '0 0 1rem 0.25rem rgba(179, 146, 255, 0.3)' : 'none',
-                }}
-                transition={{ type: 'spring', stiffness: 450, damping: 25 }}
-                overlayProps={{
-                  visibility: i === activeRepoIndex ? 'hidden' : 'visible',
-                  onClick: () => scrollIntoView(i),
-                }}
-              />
-            ))}
-          </Flex>
+          {repos.map((repo, i) => (
+            <ProjectCard
+              key={repo.name}
+              repo={repo}
+              transformOrigin='center'
+              scrollSnapAlign='center'
+              minW={['60vw', null, '52vw', 'fit']}
+              animate={{
+                transform: i === activeRepoIndex ? 'scale(1.1)' : 'scale(0.9)',
+                boxShadow: i === activeRepoIndex ? '0 0 1rem 0.25rem rgba(179, 146, 255, 0.3)' : 'none',
+              }}
+              transition={{ type: 'spring', stiffness: 450, damping: 25 }}
+              overlayProps={{
+                visibility: i === activeRepoIndex ? 'hidden' : 'visible',
+                onClick: () => scrollIntoView(i),
+              }}
+            />
+          ))}
         </Flex>
       </Flex>
     </Flex>
