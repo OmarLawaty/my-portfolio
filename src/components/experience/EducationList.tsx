@@ -2,13 +2,13 @@
 
 import { Flex, Heading, Text, type FlexProps } from '@chakra-ui/react';
 
-import { useExperienceQuery } from '@/hooks';
+import { useConfigQuery } from '@/hooks';
 import type { Education } from '@/apis';
 
 export const EducationList = () => {
-  const experienceQuery = useExperienceQuery();
+  const configQuery = useConfigQuery();
 
-  if (!experienceQuery.isSuccess) return null;
+  if (!configQuery.isSuccess) return null;
 
   return (
     <Flex as='section' flexDir='column' gap={[12, 14, 16]} w='full'>
@@ -25,7 +25,7 @@ export const EducationList = () => {
       </Heading>
 
       <Flex flexDir='column' gap={[8, 10, 12]} w='full'>
-        {experienceQuery.data.education.map(education => (
+        {configQuery.data.education.map(education => (
           <EducationCard key={education.title} education={education} />
         ))}
       </Flex>

@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 
 import { PersonalInfo } from '@/const';
 import { CertificationsList, EducationList, ExperienceHeading, WorkList } from '@/components';
-import { useExperienceQuery } from '@/hooks';
+import { useConfigQuery } from '@/hooks';
 
 export const metadata: Metadata = {
   title: `${PersonalInfo.name} | Experience`,
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const Page = async () => {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(useExperienceQuery);
+  await queryClient.prefetchQuery(useConfigQuery);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

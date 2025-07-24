@@ -2,13 +2,13 @@
 
 import { Box, Flex, Heading, Text, type FlexProps } from '@chakra-ui/react';
 
-import { useExperienceQuery } from '@/hooks';
+import { useConfigQuery } from '@/hooks';
 import type { Work } from '@/apis';
 
 export const WorkList = () => {
-  const experienceQuery = useExperienceQuery();
+  const configQuery = useConfigQuery();
 
-  if (!experienceQuery.isSuccess) return null;
+  if (!configQuery.isSuccess) return null;
 
   return (
     <Flex as='section' flexDir='column' gap={[12, 14, 16]} w='full'>
@@ -25,7 +25,7 @@ export const WorkList = () => {
       </Heading>
 
       <Flex flexDir='column' gap={[8, 10, 12]} w='full'>
-        {experienceQuery.data.work.map(work => (
+        {configQuery.data.work.map(work => (
           <WorkCard key={work.title} work={work} />
         ))}
       </Flex>

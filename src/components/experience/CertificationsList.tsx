@@ -2,15 +2,15 @@
 
 import { Flex, Grid, Heading, Text, type FlexProps } from '@chakra-ui/react';
 
-import { useExperienceQuery } from '@/hooks';
+import { useConfigQuery } from '@/hooks';
 import type { Certification } from '@/apis';
 
 import { Link } from '../Link';
 
 export const CertificationsList = () => {
-  const experienceQuery = useExperienceQuery();
+  const configQuery = useConfigQuery();
 
-  if (!experienceQuery.isSuccess) return null;
+  if (!configQuery.isSuccess) return null;
 
   return (
     <Flex as='section' flexDir='column' gap={[12, 14, 16]} w='full'>
@@ -27,7 +27,7 @@ export const CertificationsList = () => {
       </Heading>
 
       <Grid templateColumns='repeat(auto-fit, minmax(min(400px, 100%), 1fr))' gap={[8, 10, 12]} w='full'>
-        {experienceQuery.data.certifications.map(certification => (
+        {configQuery.data.certifications.map(certification => (
           <CertificationCard key={certification.title} certification={certification} />
         ))}
       </Grid>
