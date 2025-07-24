@@ -1,5 +1,6 @@
 'use client';
 
+import { isClient } from '@/utils/helpers';
 import { Box } from '@chakra-ui/react';
 import { motion, useAnimation } from 'framer-motion';
 import { useEffect, useState, type ComponentProps } from 'react';
@@ -24,14 +25,14 @@ const GlowBlob = ({
 }: GlowBlobProps) => {
   const controls = useAnimation();
   const [initialPos] = useState({
-    x: getRandom(0, window.innerWidth - size),
-    y: getRandom(0, window.innerHeight - size),
+    x: getRandom(0, isClient() ? window.innerWidth - size : 0),
+    y: getRandom(0, isClient() ? window.innerHeight - size : 0),
   });
 
   const animate = () => {
     controls.start({
-      left: getRandom(0, window.innerWidth - size),
-      top: getRandom(0, window.innerHeight - size),
+      left: getRandom(0, isClient() ? window.innerWidth - size : 0),
+      top: getRandom(0, isClient() ? window.innerHeight - size : 0),
       scale: getRandom(0.9, 1.2),
       opacity: getRandom(0.7, 1),
       transition: {
