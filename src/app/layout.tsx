@@ -22,7 +22,7 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
           <Footer />
         </Container>
 
-        <MouseGlow />
+        <AmbientGlowBackground />
       </Providers>
     </body>
   </html>

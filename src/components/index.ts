@@ -10,4 +10,4 @@ export * from './projects';
 export * from './ProjectCard';
 export * from './experience';
 export * from './PageTransitionWrapper';
-export * from './MouseGlow';
+export * from './AmbientGlowBackground';
