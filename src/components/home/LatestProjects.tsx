@@ -74,6 +74,7 @@ export const LatestProjects = () => {
           scrollBehavior='smooth'
           pos='relative'
           scrollbar='hidden'
+          data-cursor='scrollable'
           css={{
             maskImage: 'linear-gradient(to right, transparent, black 20%, black 80%, transparent)',
             WebkitMaskImage: 'linear-gradient(to right, transparent, black 20%, black 80%, transparent)',

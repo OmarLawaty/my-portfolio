@@ -14,6 +14,10 @@ export const useSlider = ({ snapOffset = 0.5 }: SliderProps = {}) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const { scrollX } = useScroll({ container: scrollContainerRef, layoutEffect: false });
 
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollStart = useRef(0);
+
   const scrollIntoView = (
     slideIndex: number,
     options: ScrollIntoViewOptions = {
@@ -52,6 +56,47 @@ export const useSlider = ({ snapOffset = 0.5 }: SliderProps = {}) => {
       debouncedSetActiveSlide.cancel();
     };
   }, [scrollX, snapOffset]);
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const handleMouseDown = (e: MouseEvent) => {
+      isDragging.current = true;
+      startX.current = e.clientX;
+      scrollStart.current = container.scrollLeft;
+      container.style.userSelect = 'none';
+      container.setAttribute('data-cursor', 'scrolling');
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging.current) return;
+      const dx = e.clientX - startX.current;
+      container.scrollLeft = scrollStart.current - dx;
+    };
+
+    const handleMouseUp = () => {
+      isDragging.current = false;
+      container.style.removeProperty('user-select');
+      container.setAttribute('data-cursor', 'scrollable');
+    };
+
+    const handleMouseLeave = () => {
+      if (isDragging.current) handleMouseUp();
+    };
+
+    container.addEventListener('mousedown', handleMouseDown);
+    container.addEventListener('mousemove', handleMouseMove);
+    container.addEventListener('mouseup', handleMouseUp);
+    container.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      container.removeEventListener('mousedown', handleMouseDown);
+      container.removeEventListener('mousemove', handleMouseMove);
+      container.removeEventListener('mouseup', handleMouseUp);
+      container.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
 
   return {
     scrollContainerRef,

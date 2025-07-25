@@ -28,6 +28,7 @@ export const Slider = (props: FlexProps) => {
         scrollBehavior='smooth'
         pos='relative'
         scrollbar='hidden'
+        data-cursor='scrollable'
         css={{
           maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
           WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
