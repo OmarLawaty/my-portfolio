@@ -5,16 +5,16 @@ import { motion } from 'motion/react';
 import type { ComponentProps } from 'react';
 import { GoLinkExternal, GoRepo } from 'react-icons/go';
 
-import type { Repository } from '@/apis';
+import type { Field, Repository } from '@/apis';
 
 import { Link } from './Link';
 
-interface ProjectCardProps extends ComponentProps<typeof AnimatedFlex> {
-  repo: Repository;
+interface ProjectCardProps<F extends Field> extends ComponentProps<typeof AnimatedFlex> {
+  repo: Repository<F>;
   overlayProps?: BoxProps;
 }
 
-export const ProjectCard = ({ repo, overlayProps, ...props }: ProjectCardProps) => (
+export const ProjectCard = <F extends Field>({ repo, overlayProps, ...props }: ProjectCardProps<F>) => (
   <AnimatedFlex
     flexDir='column'
     p={[4, 5, 6]}
