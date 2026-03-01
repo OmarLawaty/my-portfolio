@@ -1,32 +1,26 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { useLayoutEffect, useRef, useState } from 'react';
+import { Box, Flex, FlexProps, Text } from '@chakra-ui/react';
 import { motion } from 'motion/react';
 
-import { PersonalInfo } from '@/const';
+import { getIsPageActive } from '@/helpers';
+import { Page } from '@/types';
 
 import { Link } from '../Link';
 
-interface Page {
-  title: string;
-  href: string;
+interface PageIndicatorProps extends FlexProps {
+  pages: Page[];
 }
 
-const pages: Page[] = [
-  { title: PersonalInfo.name, href: '/' },
-  { title: 'Experience', href: '/experience' },
-  { title: 'Projects', href: '/projects' },
-];
-
-export const PageIndicator = () => {
+export const PageIndicator = ({ pages, ...props }: PageIndicatorProps) => {
   const [pillStyles, setPillStyles] = useState({ left: 0, width: 0 });
   const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const pathname = usePathname();
 
-  useEffect(() => {
-    const activeLinkIndex = pages.findIndex(page => page.href === pathname);
+  useLayoutEffect(() => {
+    const activeLinkIndex = pages.findIndex(page => getIsPageActive(page.href, pathname, page.isBase));
 
     const activeLinkElement = linkRefs.current[activeLinkIndex];
     if (!activeLinkElement) return;
@@ -37,10 +31,10 @@ export const PageIndicator = () => {
     const { left, width } = activeLinkElement.getBoundingClientRect();
     const headerLeft = parentElement.getBoundingClientRect().left;
     setPillStyles({ left: left - headerLeft, width });
-  }, [pathname]);
+  }, [pages, pathname]);
 
   return (
-    <Flex w={['full', 'auto']} justify='space-between' gap={[0, 2, 4]} pos='relative'>
+    <Flex w={['full', 'min-content']} justify='space-between' gap={[0, 2, 4]} pos='relative' {...props}>
       {pages.map((page, i) => (
         <Link
           key={i}
@@ -51,13 +45,19 @@ export const PageIndicator = () => {
           whiteSpace='nowrap'
           userSelect='none'
           transition='color 0.3s'
-          color={pathname === page.href ? 'white' : 'purple.300'}
-          _hover={{ color: pathname !== page.href ? 'purple.200' : 'white' }}
+          color={getIsPageActive(page.href, pathname, page.isBase) ? 'white' : 'purple.400'}
+          _hover={{ color: getIsPageActive(page.href, pathname, page.isBase) ? 'white' : 'purple.200' }}
           ref={el => {
             linkRefs.current[i] = el;
           }}
         >
-          <Text pos='relative' fontSize={['clamp(0.7rem, 4vw, 1rem)', '0.875rem', '1rem']} zIndex='1' fontWeight='600'>
+          <Text
+            pos='relative'
+            fontSize={['clamp(0.7rem, 4vw, 1rem)', '0.875rem', '1rem']}
+            zIndex='1'
+            fontWeight='600'
+            textTransform='capitalize'
+          >
             {page.title}
           </Text>
         </Link>

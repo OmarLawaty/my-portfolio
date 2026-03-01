@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 
 import { recipes } from '@/theme/recipes';
+import { pages } from '@/routes';
 
 import { ContactLinks } from '../ContactLinks';
 import { PageIndicator } from './PageIndicator';
@@ -61,7 +62,7 @@ export const Header = () => {
         }
         transition={{ type: 'spring', stiffness: 400, damping: 30 }}
       >
-        <PageIndicator />
+        <PageIndicator pages={pages} />
 
         <ContactLinks display={['none', 'flex']} />
       </AnimatedFlex>

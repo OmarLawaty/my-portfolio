@@ -1,6 +1,6 @@
 'use client';
 
-import type { ComponentProps } from 'react';
+import { forwardRef, type ComponentProps } from 'react';
 import NextLink from 'next/link';
 import { Button, chakra, type ButtonProps } from '@chakra-ui/react';
 import { motion } from 'motion/react';
@@ -22,32 +22,42 @@ const ChakraNextLink = chakra(
   {},
   {
     shouldForwardProp: prop => forwardProps.includes(prop as ForwardProp),
-  }
+  },
 );
 type NextLinkProps = ComponentProps<typeof NextLink>;
 type ChakraNextLinkProps = ComponentProps<typeof ChakraNextLink>;
 
-type LinkProps = {
+type BaseLinkProps = {
   keepSearchParams?: boolean;
-  href: ChakraNextLinkProps['href'];
-} & (
-  | ({ isDisabled: true } & ButtonProps)
-  | ({ isDisabled?: false } & Omit<ChakraNextLinkProps, ForwardProp> & Pick<NextLinkProps, ForwardProp>)
-);
+};
 
-export const Link = ({ keepSearchParams, ...props }: LinkProps) => {
-  if ('isDisabled' in props && props.isDisabled)
+type EnabledLinkProps = BaseLinkProps & {
+  isDisabled?: false;
+  href: ChakraNextLinkProps['href'];
+} & Omit<ChakraNextLinkProps, ForwardProp> &
+  Pick<NextLinkProps, ForwardProp>;
+
+type DisabledLinkProps = BaseLinkProps & {
+  isDisabled: true;
+  href?: ChakraNextLinkProps['href'];
+} & ButtonProps;
+
+type LinkProps = EnabledLinkProps | DisabledLinkProps;
+
+export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(props, ref) {
+  if (props.isDisabled)
     return (
       <Button disabled bg='transparent' m='0' p='0' minH='auto' h='auto' minW='auto' w='auto' {...props}>
         {props.children}
       </Button>
     );
 
+  const { keepSearchParams, ...linkProps } = props as EnabledLinkProps;
   const searchParams = getSearchParams();
-  const href = keepSearchParams ? `${props.href}?${searchParams}` : props.href;
+  const href = keepSearchParams ? `${linkProps.href}?${searchParams}` : linkProps.href;
 
-  return <ChakraNextLink {...props} href={href} />;
-};
+  return <ChakraNextLink {...linkProps} href={href} ref={ref} />;
+});
 
 const AnimatedChakraNextLink = motion.create(Link);
 type AnimatedChakraNextLinkProps = ComponentProps<typeof AnimatedChakraNextLink>;

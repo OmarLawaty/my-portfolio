@@ -3,11 +3,16 @@
 import { Flex } from '@chakra-ui/react';
 
 import { useReposQuery } from '@/hooks';
+import { Field } from '@/apis';
 
 import { ProjectCard } from '../ProjectCard';
 
-export const ProjectsList = () => {
-  const reposQuery = useReposQuery({ limit: 100 });
+interface ProjectsListProps {
+  filter?: Field;
+}
+
+export const ProjectsList = ({ filter }: ProjectsListProps) => {
+  const reposQuery = useReposQuery({ limit: 100, filter });
 
   if (!reposQuery.isSuccess) return null;
 
