@@ -5,15 +5,19 @@ import { PersonalInfo } from '@/const';
 import { useReposQuery } from '@/hooks';
 import { ProjectsList } from '@/components';
 import { Field } from '@/apis';
-
-export const metadata: Metadata = {
-  title: `${PersonalInfo.name} | Projects`,
-  description:
-    'Explore a selection of projects by Omar Lawatey, showcasing front-end web applications, creative solutions, and modern development practices.',
-};
+import { capitalize } from '@/helpers';
 
 interface PageProps {
   params: Promise<{ FIELD: Field }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { FIELD } = await params;
+
+  return {
+    title: `${PersonalInfo.name} | Projects - ${capitalize(FIELD)}`,
+    description: `Explore a selection of projects by Omar Lawatey, showcasing ${FIELD} projects, creative solutions, and modern development practices.`,
+  };
 }
 
 const Page = async ({ params }: PageProps) => {

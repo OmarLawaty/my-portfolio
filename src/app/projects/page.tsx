@@ -8,7 +8,7 @@ import { ProjectsList } from '@/components';
 export const metadata: Metadata = {
   title: `${PersonalInfo.name} | Projects`,
   description:
-    'Explore a selection of projects by Omar Lawatey, showcasing front-end web applications, creative solutions, and modern development practices.',
+    'Explore a selection of projects by Omar Lawatey, showcasing fullstack projects, creative solutions, and modern development practices.',
 };
 
 const Page = async () => {
