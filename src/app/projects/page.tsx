@@ -15,8 +15,8 @@ const Page = async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: useReposQuery.queryKey(100),
-    queryFn: useReposQuery.queryFn,
+    queryKey: useReposQuery.queryKey<undefined>(100),
+    queryFn: useReposQuery.queryFn<undefined>,
   });
 
   return (

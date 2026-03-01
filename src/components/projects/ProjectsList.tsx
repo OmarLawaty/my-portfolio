@@ -7,12 +7,12 @@ import { Field } from '@/apis';
 
 import { ProjectCard } from '../ProjectCard';
 
-interface ProjectsListProps {
-  filter?: Field;
+interface ProjectsListProps<F extends Field> {
+  filter?: F;
 }
 
-export const ProjectsList = ({ filter }: ProjectsListProps) => {
-  const reposQuery = useReposQuery({ limit: 100, filter });
+export const ProjectsList = <F extends Field>({ filter }: ProjectsListProps<F>) => {
+  const reposQuery = useReposQuery<F>({ limit: 100, filter });
 
   if (!reposQuery.isSuccess) return null;
 
