@@ -10,13 +10,13 @@ import { Link } from '../Link';
 import { ProjectCard } from '../ProjectCard';
 
 export const LatestProjects = () => {
-  const reposQuery = useReposQuery();
+  const reposQuery = useReposQuery({ limit: 5, filter: 'frontend' });
 
   const { scrollContainerRef, scrollIntoView, activeSlide: activeRepoIndex } = useSlider({ snapOffset: 0.1 });
 
   if (!reposQuery.isSuccess) return null;
 
-  const repos = reposQuery.data!.slice(0, 5);
+  const repos = reposQuery.data;
   const activeRepo = repos[activeRepoIndex];
 
   return (

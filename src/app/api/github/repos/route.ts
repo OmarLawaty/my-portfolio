@@ -7,5 +7,5 @@ export async function POST(req: NextRequest) {
 
   const response = await github<LatestRepositories>(query);
 
-  return NextResponse.json(response);
+  return NextResponse.json(response.search.nodes);
 }

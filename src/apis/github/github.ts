@@ -14,4 +14,4 @@ export const github = <T extends LatestRepositories>(query: string) =>
         },
       }
     )
-    .then(res => res.data.data.user);
+    .then(res => res.data.data);

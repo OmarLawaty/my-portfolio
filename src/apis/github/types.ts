@@ -1,20 +1,19 @@
 export interface GitHubResponse<T extends object> {
-  data: {
-    user: T;
-  };
+  data: T;
 }
 
 export interface LatestRepositories {
-  repositories: {
-    nodes: Repository[];
+  search: {
+    nodes: RepositoryResponse[];
   };
 }
 
-export interface Repository {
+export interface RepositoryResponse {
   name: string;
   description: string | null;
   url: string;
   homepageUrl: string;
+  createdAt: string;
   repositoryTopics: {
     nodes: RepositoryTopic[];
   };
@@ -26,4 +25,10 @@ export interface RepositoryTopic {
   };
 }
 
-export type Field = 'f' | 'b';
+export interface Repository<F extends Field | undefined> extends Omit<RepositoryResponse, 'repositoryTopics'> {
+  topics: string[];
+  type: F extends Field ? F : Field;
+  rank: number;
+}
+
+export type Field = 'frontend' | 'backend';

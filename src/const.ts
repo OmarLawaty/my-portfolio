@@ -1,3 +1,5 @@
+import { Field } from './apis';
+
 import { constructStorageURL } from './utils/helpers';
 
 export const PersonalInfo = {
@@ -10,3 +12,5 @@ export const PersonalInfo = {
   resume: constructStorageURL('resume.pdf'),
   locations: ['Giza, Egypt', 'Damietta, Egypt'],
 };
+
+export const RepoFields: Field[] = ['frontend', 'backend'];

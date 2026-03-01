@@ -46,13 +46,15 @@ export const ProjectCard = ({ repo, overlayProps, ...props }: ProjectCardProps) 
 
     <Text fontSize={['0.75rem', null, '0.875rem']}>{repo.description}</Text>
 
-    <Flex align='center' gap='2.5' fontSize={['0.75rem', null, '0.875rem']}>
-      <GoLinkExternal />
+    {repo.type === 'frontend' && (
+      <Flex align='center' gap='2.5' fontSize={['0.75rem', null, '0.875rem']}>
+        <GoLinkExternal />
 
-      <Link href={repo.homepageUrl} target='_blank' color='purple.200' fontWeight='600'>
-        Live Preview
-      </Link>
-    </Flex>
+        <Link href={repo.homepageUrl} target='_blank' color='purple.200' fontWeight='600'>
+          Live Preview
+        </Link>
+      </Flex>
+    )}
 
     <Box pos='absolute' inset='0' data-cursor='interactive' visibility='hidden' {...overlayProps} />
   </AnimatedFlex>

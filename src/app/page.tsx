@@ -17,7 +17,7 @@ const Home = async () => {
 
   await Promise.all([
     queryClient.prefetchQuery({
-      queryKey: useReposQuery.queryKey(),
+      queryKey: useReposQuery.queryKey(5, 'frontend'),
       queryFn: useReposQuery.queryFn,
     }),
     queryClient.prefetchQuery(useConfigQuery),
