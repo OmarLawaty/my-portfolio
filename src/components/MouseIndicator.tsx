@@ -1,11 +1,13 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'motion/react';
 
 export const MouseIndicator = () => {
   const backgroundColor = useMotionValue('transparent');
   const height = useMotionValue('1.5rem');
+  const opacity = useMotionValue(0);
+  const hasMovedRef = useRef(false);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -18,6 +20,11 @@ export const MouseIndicator = () => {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
+      if (!hasMovedRef.current) {
+        hasMovedRef.current = true;
+        opacity.set(1);
+      }
+
       mouseX.set(e.clientX - 12);
       mouseY.set(e.clientY - 12);
     };
@@ -57,6 +64,7 @@ export const MouseIndicator = () => {
         border: '2px solid white',
         mixBlendMode: 'difference',
         backgroundColor,
+        opacity,
         scale,
         x: mouseX,
         y: mouseY,
