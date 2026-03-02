@@ -14,22 +14,35 @@ export const MouseIndicator = () => {
 
   const rawScale = useMotionValue(1);
   const scale = useSpring(rawScale, {
-    stiffness: 300,
-    damping: 20,
+    stiffness: 260,
+    damping: 26,
   });
 
+  const frameRef = useRef<number | null>(null);
+  const latestXRef = useRef(0);
+  const latestYRef = useRef(0);
+
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    const updatePosition = () => {
+      mouseX.set(latestXRef.current - 12);
+      mouseY.set(latestYRef.current - 12);
+      frameRef.current = null;
+    };
+
+    const handlePointerMove = (e: PointerEvent) => {
       if (!hasMovedRef.current) {
         hasMovedRef.current = true;
         opacity.set(1);
       }
 
-      mouseX.set(e.clientX - 12);
-      mouseY.set(e.clientY - 12);
+      latestXRef.current = e.clientX;
+      latestYRef.current = e.clientY;
+
+      if (frameRef.current !== null) return;
+      frameRef.current = window.requestAnimationFrame(updatePosition);
     };
 
-    const handleMouseOver = (e: MouseEvent) => {
+    const handlePointerOver = (e: PointerEvent) => {
       const target = e.target as HTMLElement;
       const interactive = !!target.closest('a, button, [data-cursor="interactive"]');
       const scrollable = target.closest('[data-cursor="scrollable"]');
@@ -40,12 +53,17 @@ export const MouseIndicator = () => {
       rawScale.set(interactive || scrolling ? 1.5 : 1);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseover', handleMouseOver);
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    window.addEventListener('pointerover', handlePointerOver, { passive: true });
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerover', handlePointerOver);
+
+      if (frameRef.current !== null) {
+        window.cancelAnimationFrame(frameRef.current);
+        frameRef.current = null;
+      }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -62,13 +80,13 @@ export const MouseIndicator = () => {
         pointerEvents: 'none',
         zIndex: 99999,
         border: '2px solid white',
-        mixBlendMode: 'difference',
         backgroundColor,
         opacity,
         scale,
         x: mouseX,
         y: mouseY,
-        willChange: 'transform',
+        willChange: 'transform, opacity',
+        transform: 'translate3d(0, 0, 0)',
       }}
     />
   );
